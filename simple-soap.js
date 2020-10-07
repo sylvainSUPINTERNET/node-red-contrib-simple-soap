@@ -69,12 +69,15 @@ module.exports = function (RED) {
             reqOpts.forever = true;
             reqOpts.body = reqBody;
 
-            if (config.useAuth && node.credentials) {
+/*            if (config.useAuth && node.credentials) {
                 reqOpts.auth = {
                     user: node.credentials.user,
                     pass: node.credentials.password || ""
                 };
-            }
+            } */
+
+	    reqOpts.auth = process.env.SOAP_SP3_USER;
+            reqOpts.auth = process.env.SOAP_SP3_PASSWORD;
 
             request(reqOpts, function (err, response, body) {
 
